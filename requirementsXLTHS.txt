@@ -1,0 +1,7 @@
+
+requests
+pytest
+pandas
+matplotlib
+scipy
+influxdb-client
