@@ -3,7 +3,9 @@ import matplotlib.pyplot as plt
 from scipy.signal import savgol_filter
 from influxdb_client import InfluxDBClient
 
-INFLUX_URL = "http://192.168.1.253:8086"
+# Cấu hình kết nối InfluxDB
+
+INFLUX_URL = "http://influxdb.skymyname.live"
 INFLUX_TOKEN = "YSHMaYi6ZtfwL9j2mGPSlOWa5udBMTPD8J3dX3bz4Ef4LB98205HxIpRQZ_-pb_o_McJU96R-qFtQvDZZaUOfg=="
 INFLUX_ORG = "Sky"
 INFLUX_BUCKET = "proxmox"
@@ -19,7 +21,7 @@ from(bucket: "{INFLUX_BUCKET}")
       _value: r._value / 4.0 * 100.0,
       _field: "CPU Load %"
   }}))
-  |> aggregateWindow(every: 1m, fn: mean, createEmpty: false) // Gộp mỗi 1 phút
+  |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)
 '''
 
 client = InfluxDBClient(url=INFLUX_URL, token=INFLUX_TOKEN, org=INFLUX_ORG)
